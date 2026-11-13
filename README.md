@@ -159,6 +159,13 @@ Non repris (volontairement) : `Conv_unity()`, `unity_float`, `unity_double` —
 leur rôle est couvert par la librairie **Unity** (`C_UNITY`), qui applique
 réellement les préfixes SI.
 
+### Reste à faire
+
+Les deux headers partagés `0_INCLUDE_/Arduino/unity_define.h` et
+`unity_fct.h` ne sont plus inclus par **aucun** projet du parc depuis le
+13/11/2026 (vérifié sur `0_PlatformIO/0_iOT/`). Ils peuvent être supprimés du
+dossier partagé.
+
 ---
 
 ## Licence
