@@ -5,7 +5,7 @@ Instructions pour les agents IA travaillant sur ce dépôt.
 ## Informations générales
 
 - **Nom de la librairie** : Unity_Dictionary
-- **Version** : 1.1.0
+- **Version** : 1.2.0
 - **Compte GitHub** : https://github.com/Fo170/
 - **Auteur** : Olivier FOURNET
 - **Email** : olivier.fournet@free.fr

@@ -14,13 +14,13 @@
 //  pas par le code d'unité.
 //
 //  Auteur  : FOURNET Olivier (GPL-3.0)
-//  Version : 1.1.0
+//  Version : 1.2.0
 // ============================================================================
 #ifndef UNITY_DICTIONARY_H
 #define UNITY_DICTIONARY_H
 
 // Version de la librairie (source UNIQUE — agrégée par liste_lib.h)
-#define __UNITY_DICTIONARY_H_VERSION__ "1.1.0"
+#define __UNITY_DICTIONARY_H_VERSION__ "1.2.0"
 
 #include <Arduino.h>
 
@@ -68,6 +68,15 @@
 #define _Unit_SOC_            40    // State Of Charge
 #define _Unit_pourcent_       41    // %
 #define _Unit_n_              42    // rendement (0 à 1)
+
+// --- Puissances avec magnitude (ajout 13/11/2026, v1.2.0) --------------------
+// DÉROGATION ASSUMÉE à la règle « unité de base seule ».
+// Les capteurs d'énergie Domoticz sont configurés sur ces magnitudes précises :
+// convertir à la frontière serait une source d'erreur de plus, sans bénéfice.
+// Ces codes ne remplacent PAS _Unit_VA_ (9) / _Unit_VAR_ (10) : ils coexistent,
+// et c'est l'application qui choisit ce qu'elle déclare.
+#define _Unit_kVA_            43    // kVA   puissance apparente, magnitude k
+#define _Unit_kVAR_           44    // kVAR  puissance réactive, magnitude k
 
 #define _NAN_                255    // erreur de donnée
 
@@ -154,6 +163,8 @@ inline String Str_Unit(uint16_t unit, int type)
         case _Unit_SOC_:                    str = "SOC";            break;
         case _Unit_pourcent_:               str = "%";              break;
         case _Unit_n_:                      str = "n";              break;
+        case _Unit_kVA_:                    str = "kVA";            break;
+        case _Unit_kVAR_:                   str = "kVAR";           break;
 
 #if UNITY_DICTIONARY_COMPAT
         case _Unit_kW_:                     str = "kW";             break;

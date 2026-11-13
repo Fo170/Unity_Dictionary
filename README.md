@@ -27,7 +27,7 @@ Séparer les deux permet de **changer d'unité sans toucher au formatage**, et d
 
 ```ini
 lib_deps =
-    https://github.com/Fo170/Unity_Dictionary.git@^1.1.0
+    https://github.com/Fo170/Unity_Dictionary.git@^1.2.0
     https://github.com/Fo170/Unity.git@^1.0.0
 ```
 
@@ -67,6 +67,20 @@ d'exception, jamais de plantage.
 | 8 | `_Unit_Coulomb_` | `Coulombs` | `Coulombs` |
 | **9** | **`_Unit_VA_`** | **`VA`** | **`VA`** |
 | **10** | **`_Unit_VAR_`** | **`VAR`** | **`VAR`** |
+
+### Puissances avec magnitude (dérogation assumée)
+
+Les capteurs d'énergie Domoticz sont configurés sur des magnitudes précises.
+Ces deux codes transportent la magnitude dans l'unité, comme les codes
+historiques 29 / 34 / 35 :
+
+| Code | Constante | Symbole | Usage |
+|---|---|---|---|
+| **43** | **`_Unit_kVA_`** | **`kVA`** | puissance apparente, magnitude k |
+| **44** | **`_Unit_kVAR_`** | **`kVAR`** | puissance réactive, magnitude k |
+
+Ils **ne remplacent pas** `_Unit_VA_` (9) / `_Unit_VAR_` (10) : les deux familles
+coexistent, et c'est l'application qui choisit ce qu'elle déclare.
 
 ### Temps et divers
 

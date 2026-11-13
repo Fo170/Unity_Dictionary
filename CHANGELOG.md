@@ -3,6 +3,30 @@
 Toutes les dates sont au format AAAA-MM-JJ.
 Le versionnage suit [SemVer](https://semver.org/lang/fr/).
 
+## [1.2.0] - 2026-11-13
+
+### ✨ Ajouté
+
+- `_Unit_kVA_` (43) et `_Unit_kVAR_` (44) — puissances apparente et réactive
+  **avec leur magnitude**.
+
+### Pourquoi une dérogation à la règle « unité de base seule »
+
+Les capteurs d'énergie Domoticz sont configurés sur des magnitudes précises
+(kVA, kVAR, kWh). Faire transiter la valeur en VA et convertir à la frontière
+HTTP ajouterait une source d'erreur sans aucun bénéfice : le PZEM mesure
+nativement en kVA et publie son index en kWh.
+
+**Ces codes ne remplacent pas `_Unit_VA_` (9) et `_Unit_VAR_` (10)** : les deux
+familles coexistent. C'est l'application qui choisit ce qu'elle déclare, et le
+contrat de trame ESP-NOW fixe l'unité variable par variable.
+
+### Migration depuis 1.1.0
+
+Aucune action. Ajout purement additif.
+
+---
+
 ## [1.1.0] - 2026-11-13
 
 ### ✨ Ajouté

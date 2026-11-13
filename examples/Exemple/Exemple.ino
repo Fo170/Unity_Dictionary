@@ -14,6 +14,8 @@ const ExempleUnite unites[] = {
   { _Unit_Watt_,        "puissance active" },
   { _Unit_VA_,          "puissance apparente" },
   { _Unit_VAR_,         "puissance reactive"  },
+  { _Unit_kVA_,         "apparente, magnitude k" },
+  { _Unit_kVAR_,        "reactive, magnitude k" },
   { _Unit_Centigrade_,  "temperature"      },
   { _Unit_Wh_,          "energie"          },
   { _Unit_Lux_,         "luminosite"       },
