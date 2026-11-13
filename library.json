@@ -1,6 +1,6 @@
 {
   "name": "Unity_Dictionary",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Dictionnaire des unités de mesure pour Arduino : code d'unité -> symbole d'affichage (RS232 ou web). Aucune magnitude (kilo, milli, méga) : le préfixe SI est du ressort de la librairie Unity. Complémentaire de Unity.",
   "keywords": ["Bibliothèque", "unity", "unité", "unit", "SI", "dictionnaire"],
   "repository": {"type": "git","url": "https://github.com/Fo170/Unity_Dictionary.git"},

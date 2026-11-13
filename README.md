@@ -27,7 +27,7 @@ Séparer les deux permet de **changer d'unité sans toucher au formatage**, et d
 
 ```ini
 lib_deps =
-    https://github.com/Fo170/Unity_Dictionary.git@^1.0.0
+    https://github.com/Fo170/Unity_Dictionary.git@^1.1.0
     https://github.com/Fo170/Unity.git@^1.0.0
 ```
 
@@ -40,6 +40,10 @@ lib_deps =
 
 Serial.println(Str_Unit(_Unit_VA_,  _TYPE_RS232_));   // "VA"
 Serial.println(Str_Unit(_Unit_Centigrade_, _TYPE_WEB_)); // "&deg;C"
+
+// Raccourcis équivalents (parité avec l'ancien unity_fct.h)
+Serial.println(Str_Unit_RS232(_Unit_VA_));            // "VA"
+Serial.println(Str_Unit_Web(_Unit_Centigrade_));      // "&deg;C"
 ```
 
 `Str_Unit(unit, type)` renvoie une chaîne vide pour un code inconnu — jamais
@@ -122,16 +126,18 @@ Ces codes portent encore une magnitude, contrairement à la règle :
 | 34 | `_Unit_kWh_` | `_Unit_Wh_` + valeur en **Wh** |
 | 35 | `_Unit_kOhms_` | `_Unit_Ohms_` + valeur en **Ω** |
 
-Ils sont conservés pour que les projets non encore migrés continuent de compiler
-et d'afficher correctement. Désactivables via :
+**Ces codes ne sont pas près de disparaître.** Leur valeur numérique circule
+dans la trame ESP-NOW : le radiateur, l'ordonnanceur et le datalogger la
+décodent pour afficher l'unité. Renuméroter casserait l'affichage de tout le
+parc en une seule fois, sans possibilité de mise à jour atomique. La migration
+exige donc une **révision versionnée du contrat de trame**, pas un simple
+changement de librairie.
+
+Ils restent néanmoins désactivables pour un projet isolé :
 
 ```cpp
 #define UNITY_DICTIONARY_COMPAT 0   // avant l'include
 ```
-
-**Suppression prévue en v1.1.0**, une fois les 5 projets concernés migrés
-(ESP8266-Radiateur, ESP8266-Thermometre, PZEM004T, Station_Meteo,
-WeMosMini_BME280_Garage).
 
 ---
 
@@ -145,7 +151,13 @@ Ces deux headers du dossier partagé `0_INCLUDE_/Arduino/` fusionnent ici.
 + #include <Unity_Dictionary.h>
 ```
 
-`Str_Unit(unit, type)` garde exactement la même signature : aucun appel à modifier.
+Toute l'API utilisée est conservée : `Str_Unit(unit, type)`,
+`Str_Unit_RS232(unit)`, `Str_Unit_Web(unit)`, tous les codes `_Unit_*`,
+`_TYPE_RS232_`, `_TYPE_WEB_`, `_NAN_`. **Aucun appel à modifier.**
+
+Non repris (volontairement) : `Conv_unity()`, `unity_float`, `unity_double` —
+leur rôle est couvert par la librairie **Unity** (`C_UNITY`), qui applique
+réellement les préfixes SI.
 
 ---
 

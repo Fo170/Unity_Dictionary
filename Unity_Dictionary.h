@@ -14,13 +14,13 @@
 //  pas par le code d'unité.
 //
 //  Auteur  : FOURNET Olivier (GPL-3.0)
-//  Version : 1.0.0
+//  Version : 1.1.0
 // ============================================================================
 #ifndef UNITY_DICTIONARY_H
 #define UNITY_DICTIONARY_H
 
 // Version de la librairie (source UNIQUE — agrégée par liste_lib.h)
-#define __UNITY_DICTIONARY_H_VERSION__ "1.0.0"
+#define __UNITY_DICTIONARY_H_VERSION__ "1.1.0"
 
 #include <Arduino.h>
 
@@ -76,13 +76,15 @@
 
 // ----------------------------------------------------------------------------
 //  Compatibilité — codes HISTORIQUES portant une magnitude
-//  ⚠️ DETTE TECHNIQUE : ces trois codes contredisent la règle « unité de base
-//  seule ». Ils sont conservés pour que les projets non encore migrés
-//  continuent de compiler ET d'afficher correctement.
-//  Migration : remplacer _Unit_kW_ par _Unit_Watt_ (valeur en W),
-//              _Unit_kWh_ par _Unit_Wh_ (valeur en Wh),
-//              _Unit_kOhms_ par _Unit_Ohms_ (valeur en Ω).
-//  À supprimer en v1.1.0 une fois les 5 projets migrés.
+//  ⚠️ DETTE TECHNIQUE ASSUMÉE : ces trois codes contredisent la règle « unité
+//  de base seule ». Ils restent DÉFINITIVEMENT exposés tant qu'ils circulent
+//  sur la trame ESP-NOW : la valeur du code part sur le réseau et les autres
+//  appareils du parc (Ordonnanceur, radiateurs, datalogger) la décodent.
+//  Les renommer casserait l'affichage de tout le parc en une seule fois.
+//  Migration possible seulement avec une révision du contrat de trame :
+//              _Unit_kW_   -> _Unit_Watt_  + valeur en W
+//              _Unit_kWh_  -> _Unit_Wh_    + valeur en Wh
+//              _Unit_kOhms_-> _Unit_Ohms_  + valeur en Ω
 // ----------------------------------------------------------------------------
 #ifndef UNITY_DICTIONARY_COMPAT
   #define UNITY_DICTIONARY_COMPAT 1
@@ -167,5 +169,12 @@ inline String Str_Unit(uint16_t unit, int type)
     }
     return str;
 }
+
+// ----------------------------------------------------------------------------
+//  Raccourcis — parité d'API avec l'ancien `unity_fct.h` du dossier partagé.
+//  Permettent de migrer un projet sans réécrire ses appels.
+// ----------------------------------------------------------------------------
+inline String Str_Unit_RS232(uint16_t unit) { return Str_Unit(unit, _TYPE_RS232_); }
+inline String Str_Unit_Web(uint16_t unit)   { return Str_Unit(unit, _TYPE_WEB_);   }
 
 #endif // UNITY_DICTIONARY_H

@@ -3,6 +3,29 @@
 Toutes les dates sont au format AAAA-MM-JJ.
 Le versionnage suit [SemVer](https://semver.org/lang/fr/).
 
+## [1.1.0] - 2026-11-13
+
+### ✨ Ajouté
+
+- `Str_Unit_RS232(unit)` et `Str_Unit_Web(unit)` — raccourcis `inline` vers
+  `Str_Unit(unit, type)`. Ils complètent la parité d'API avec l'ancien
+  `unity_fct.h`, ce qui permet à un projet de migrer **sans réécrire un seul
+  appel** (cas de PZEM004T : ~30 sites `Str_Unit_Web(...)`).
+
+### 🔧 Modifié
+
+- La dette technique `UNITY_DICTIONARY_COMPAT` n'est **plus** planifiée pour
+  suppression. Les codes 29 / 34 / 35 circulent dans la trame ESP-NOW : les
+  autres appareils du parc les décodent, une renumérotation casserait leur
+  affichage. La migration exige une révision du contrat de trame, pas un
+  simple changement de librairie.
+
+### Migration depuis 1.0.0
+
+Aucune action. Les ajouts sont purement additifs.
+
+---
+
 ## [1.0.0] - 2026-11-13
 
 ### ✨ Création
