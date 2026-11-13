@@ -1,0 +1,31 @@
+{
+  "name": "Unity_Dictionary",
+  "version": "1.0.0",
+  "description": "Dictionnaire des unités de mesure pour Arduino : code d'unité -> symbole d'affichage (RS232 ou web). Aucune magnitude (kilo, milli, méga) : le préfixe SI est du ressort de la librairie Unity. Complémentaire de Unity.",
+  "keywords": ["Bibliothèque", "unity", "unité", "unit", "SI", "dictionnaire"],
+  "repository": {"type": "git","url": "https://github.com/Fo170/Unity_Dictionary.git"},
+  "authors": [{"name": "Olivier FOURNET","email": "olivier.fournet@free.fr","url": "https://github.com/Fo170","maintainer": true }],
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/Fo170/Unity_Dictionary",
+  "frameworks": "arduino",
+  "platforms": [ "*" ],
+  "headers": "Unity_Dictionary.h",
+  "dependencies": {},
+  "examples": [
+    {
+      "name": "Affichage des unités",
+      "base": "examples",
+      "files": ["examples/Exemple/Exemple.ino"]
+    }
+  ],
+  "export": {
+    "exclude": [
+      ".github",
+      "docs",
+      "tests",
+      "*.md",
+      "*.yml",
+      "*.txt"
+    ]
+  }
+}
